@@ -1,18 +1,15 @@
-SI507 - Final Project by your name
+# SI507 - Final Project by Roy Wang
 
 ----------
-Overall
+## Overall
 
-My project will …include a few sentences to summarize what the Flask app you’re building in your project will do/deal with/show. The project will allow users to specify what users can see, click on, understand, do (in less than 5 sentences).
-
-
-> Example: My project will aggregate crime data in Ann Arbor and allow a user to select one or more crime type to see a graph of crime frequency by month by inputting different data into a URL — either for a single year or comparing across several years. There will be a route for looking at visualizations of crime over specific years. In another route, data will also be displayed using HTML tables to show all the information in aggregate with specific details. A user will be able to select a type of crime from a form that they are interested in, and submit the form to see some summaries about that type of crime (e.g. which year in the dataset had the most frequent occurrences of that crime type).
-
+My project will …include a few sentences to summarize what the Flask app you’re building in your project will do/deal with/show. 
+The project will allow users to specify what users can see, click on, understand, do (in less than 5 sentences).
 
 I want to focus on … visualizing an existing dataset to make it understandable, collecting data from user input, sourcing data from a website or API based on user input and processing it, or any other specifics of what your focus will be for this application.
 
 
-Interface description
+## Interface description
 - Route 1: /route/route   →   
   This page will show the information here, a brief description.
   
@@ -23,10 +20,8 @@ Interface description
   This page will show the information here, a brief description.
 
 
-> OK to include more, but you must describe ideas for at least 3.
 
-
-Specifics
+## Specifics
 
 I will be relying on data from scraping [a specific website or multiple websites/multiple pages from the same website], making requests to [a specific API / multiple APIs], user input to a form or in a URL, or a downloaded dataset that I found [at this link]. You should describe exactly what data you plan to use and where and how you will get it. It may be any of those options, or multiple of them.
 
@@ -58,7 +53,7 @@ The assignment(s) in 507 we’ve done that are most like what I want to do are: 
 Other useful resources for this project for me will be: links or references to specific things I think will be helpful to reference, including specific lecture notes, lab examples, code examples from class, readings, or anything on the internet you’ve found useful
 
 
-Other
+## Other
 
 My biggest concerns about my work on this project are short description of my concerns
 
