@@ -3,21 +3,20 @@
 ----------
 ## Overall
 
-My project will …include a few sentences to summarize what the Flask app you’re building in your project will do/deal with/show. 
-The project will allow users to specify what users can see, click on, understand, do (in less than 5 sentences).
+My project will present a database of Marvel superhero characters and the movies. There will be a route for looking for the superheroes' information and description, and another route will be the presentation of past and upcoming Marvel movies. The user can click into their favorite character to check his/her superpower, history, background story and also be able to see what movies he/she were in or they can also click into their favorite movie to see what characters were in there.
 
-I want to focus on … visualizing an existing dataset to make it understandable, collecting data from user input, sourcing data from a website or API based on user input and processing it, or any other specifics of what your focus will be for this application.
+I want to focus on sourcing data from a website or API based on user input and processing it.
 
 
 ## Interface description
-- Route 1: /route/route   →   
-  This page will show the information here, a brief description.
+- Route 1: /index   →   
+  Homepage that shows the upcoming Marvel movies.
   
-- Route 2: /route/route  →   
-  This page will show the information here, a brief description.
+- Route 2: /superhero/<name>  →   
+  The introduction of superheroes.
   
-- Route 3: /route/route  →   
-  This page will show the information here, a brief description.
+- Route 3: /movie/<name>  →   
+  The introduction of movies.
 
 
 
