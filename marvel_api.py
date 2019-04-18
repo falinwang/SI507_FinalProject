@@ -1,5 +1,9 @@
 # Marvel API
+# source from: https://github.com/wrap-away/Marvel-API/ and https://github.com/YZHANG1270/Marvel_KnowledgeGraph/blob/master/marvel_api.ipynb
+import os
+import pytest
 from marvel import Marvel
+from marvel.exceptions import MarvelException
 
 # Create a cache file to store json file
 CACHE_FNAME = 'marvel_cache.json'
