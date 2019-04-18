@@ -1,9 +1,6 @@
 # Marvel API
-# source from: https://github.com/wrap-away/Marvel-API/ and https://github.com/YZHANG1270/Marvel_KnowledgeGraph/blob/master/marvel_api.ipynb
-import os
-import pytest
 from marvel import Marvel
-from marvel.exceptions import MarvelException
+import requests
 
 # Create a cache file to store json file
 CACHE_FNAME = 'marvel_cache.json'
@@ -19,9 +16,9 @@ class MarvelHero(object):
 
     def __str__(self):
         if self.description:
-            return "{}: {}. Learn more here: {}".format(self.name, self.description, self.wiki)
+            return "ID: {} - {}: {}.\nLearn more here: {}".format(self.id, self.name, self.description, self.wiki)
         else:
-            return "Find more about {} in {}.".format(self.name, self.wiki)
+            return "ID: {} - Find more about {} in {}.".format(self.id, self.name, self.wiki)
 
 
 try:
@@ -39,8 +36,7 @@ m = Marvel(PUBLIC_KEY, PRIVATE_KEY)
 character = m.characters
 character.all()
 
-instance_list_ticketmaster = []
-instance_list_ticketmaster_artists = []
+instance_list = []
 
 while True:
     name = input("Enter the characters with names that begin with: ")
@@ -48,9 +44,8 @@ while True:
     try:
         for each_hero in hero_list['data']['results']:
             instance = MarvelHero(each_hero)
-            instance_list_ticketmaster.append(instance)
-            instance_list_ticketmaster_artists = instance.name
-        print("Searching for keyword \"{}\" in Marvel database ...".format(nameStartsWith_input))
+            instance_list.append(instance)
+        print("Searching for keyword \"{}\" in Marvel database ...".format(name))
     except:
         print("\nSorry, no result matches the keyword. Please try again.")
     else:
@@ -58,10 +53,25 @@ while True:
         break
 print("==================================================================================")
 # Print the concert details
-if instance_list_ticketmaster != []:
+if instance_list != []:
     # print(instance_list_ticketmaster_artists)
-    for i in instance_list_ticketmaster:
+    for i in instance_list:
         print("\n")
         print(i)
-        print("\n")
 print("==================================================================================")
+
+# print("\n=============== CSV =================\n")
+## Step 9:
+## Make a CSV file called "event_media.csv"
+
+# csv_file = open("hero_media.CSV", "w")
+# csv_file.write("Concert,Date,Time,Lineup,Link\n")
+# for event in instance_list_ticketmaster:
+#     csv_file.write("{},{},{},{},{}\n".format(event.eventname, event.date, event.time, event.artists_string_grammar(), event.eventlink))
+# csv_file.write("\n")
+# csv_file.write("Artist,Track,Album,Length,Release Date\n")
+# for artist in itunes_results_master:
+#     for song in artist:
+#         csv_file.write("{},{},{},{},{}\n".format(song.artists.replace(',', '&'), song.song.replace(',', ''), song.collection.replace(',', '&'), song.normallength(), song.date))
+# csv_file.close()
+# print("The CSV file is created successfully. Open the file and Listen to the top 10 songs we have sorted for you.\nLet's start from the latest one! Enjoy!")
