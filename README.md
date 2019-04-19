@@ -18,15 +18,13 @@ This project is about using movie database and Marvel superheroes API to introdu
 
 ## How to use
 
-1. A useful instruction goes here
-2. A useful second step here
+1. Enter some keywords abuot the name of the charactre in the searching box to search the superheroes.
+2. The result will show you related hero's name, description and wiki link and the picutre of the hero.
 3. (Optional): Markdown syntax to include an screenshot/image: ![alt text](image.jpg)
 
 ## Routes in this application
-- `/home` -> this is the home page
-- `/form` -> this route has a form for user input
-- `/result` -> this route is where the form sends the result...
-- `/newuser/<username>` -> this route also takes input of a name and shows you a greeting
+- `/` -> this is the home page
+
 
 ## How to run tests
 1. First... (e.g. access a certain directory if necessary)
@@ -35,11 +33,19 @@ This project is about using movie database and Marvel superheroes API to introdu
 NOTE: Need not have 3 steps, but should have as many as are appropriate!
 
 ## In this repository:
-- Directory Name
-  - File in directory
-  - File in directory
-- File name
-- File name
+- SI507project_tools.py
+- SI507project_tests.py
+- SI507_finalProject.py
+- marvel_api.py
+- requirements.txt
+- templates
+  - base.html
+  - index.html
+  - 404.html
+- static
+  - favicon.ico
+  - favicon.notes
+- marvel_cache.json (Example)
 
 ---
 ## Code Requirements for Grading
@@ -54,7 +60,7 @@ Below is a list of the requirements listed in the rubric for you to copy and pas
 - [x] Project includes a working Flask application that runs locally on a computer
 - [ ] Project includes at least 1 test suite file with reasonable tests in it.
 - [x] Includes a `requirements.txt` file containing all required modules to run program
-- [ ] Includes a clear and readable README.md that follows this template
+- [x] Includes a clear and readable README.md that follows this template
 - [ ] Includes a sample .sqlite/.db file
 - [ ] Includes a diagram of your database schema
 - [ ] Includes EVERY file needed in order to run the project
@@ -71,15 +77,15 @@ Below is a list of the requirements listed in the rubric for you to copy and pas
 - [x] Use of a new module
 - [ ] Use of a second new module
 - [ ] Object definitions using inheritance (indicate if this counts for 2 or 3 of the six requirements in a parenthetical)
-- [ ] A many-to-many relationship in your database structure
-- [ ] At least one form in your Flask application
-- [ ] Templating in your Flask application
-- [ ] Inclusion of JavaScript files in the application
+- [x] A many-to-many relationship in your database structure
+- [x] At least one form in your Flask application
+- [x] Templating in your Flask application
+- [x] Inclusion of JavaScript files in the application
 - [ ] Links in the views of Flask application page/s
 - [ ] Relevant use of `itertools` and/or `collections`
 - [ ] Sourcing of data using web scraping
 - [x] Sourcing of data using web REST API requests
-- [ ] Sourcing of data using user input and/or a downloaded .csv or .json dataset
+- [x] Sourcing of data using user input and/or a downloaded .csv or .json dataset
 - [x] Caching of data you continually retrieve from the internet in some way
 
 ### Submission
