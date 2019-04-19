@@ -1,4 +1,4 @@
-# SI 507 Final Project
+# SI 507 Final Project: Marvel database
 
 Roy Fa-Lin Wang
 
@@ -8,22 +8,26 @@ Roy Fa-Lin Wang
 
 ## Project Description
 
-This project is about using movie database and Marvel superheroes API to introduct the information and image of superheroes by searching and sorting.
+This project is about using movie database and Marvel superheroes API to introduce the information and image of superheroes by searching and sorting.
 
 ## How to run
 
 1. First, you should install all requirements with `pip install -r requirements.txt`
-2. Second, you should run `python programname.py runserver`.
+2. Second, you should run `python SI507_finalProject.py runserver`.
 3. Then open your browser and enter localhost 5000.
 
 ## How to use
 
-1. Enter some keywords abuot the name of the charactre in the searching box to search the superheroes.
-2. The result will show you related hero's name, description and wiki link and the picutre of the hero.
+1. Enter some keywords about the name of the character in the searching box to search the superheroes.
+2. The result will show you related hero's name, description and wiki link and the picture of the hero.
 3. (Optional): Markdown syntax to include an screenshot/image: ![alt text](image.jpg)
 
 ## Routes in this application
-- `/` -> this is the home page
+- `/` -> This is the home page. This page will show the upcoming Marvel movies and have a search tool for superheroes.
+- `/superhero` -> This page will show the total numbers of superheroes.
+- `/superhero/<hero_name>` -> This page will show the introduction of superheroes.
+- /movie -> This page will show the total numbers of movies.
+- /movie/<movie_name> -> This page will show the introduction of movies.
 
 
 ## How to run tests
