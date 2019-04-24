@@ -99,3 +99,39 @@ print("=========================================================================
 #         csv_file.write("{},{},{},{},{}\n".format(song.artists.replace(',', '&'), song.song.replace(',', ''), song.collection.replace(',', '&'), song.normallength(), song.date))
 # csv_file.close()
 # print("The CSV file is created successfully. Open the file and Listen to the top 10 songs we have sorted for you.\nLet's start from the latest one! Enjoy!")
+
+
+
+# ================ MOVIE =====================
+import csv
+import pandas as pd
+
+class Movie:
+    def __init__(self, data):
+        self.title = data['Title']
+        self.us_gross = data['US Gross']
+        self.worldwide_gross = data['Worldwide Gross']
+        self.us_dvd_sales = data['US DVD Sales']
+        self.production_budget = data['Production Budget']
+        self.release_date = data['Release Date']
+        self.mpaa_rating = data['MPAA Rating']
+        self.time = data['Running Time (min)']
+        self.distributor = data['Distributor']
+        self.source = data['Source']
+        self.genre = data['Major Genre']
+        self.creative_type = data['Creative Type']
+        self.director = data['Director']
+        self.tomatoes_rating = data['Rotten Tomatoes Rating']
+        self.imdb_rating = data['IMDB Rating']
+        self.imdb_votes = data['IMDB Votes']
+
+    def __str__(self):
+        return "{} | {}".format(self.title, self.imdb_rating)
+
+Marvel_moive = ['Iron Man', 'The Incredible Hulk', ]
+
+if __name__ == "__main__":
+    clean_movies = pd.read_csv('movies_clean.csv')
+    test = Movie(clean_movies.iloc[0])
+    print(test)
+    print(len(clean_movies.index))
