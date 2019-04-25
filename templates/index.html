@@ -4,14 +4,14 @@
 
 {% block page_content %}
 <h1>Welcome to the homepage!</h1>
-<!-- <form action="http://localhost:5000/result" method='GET'>
-<input type="checkbox" name="vehicle1" value="Bike"> I have a bike<br>
-<input type="checkbox" name="vehicle2" value="Car"> I have a car<br>
-<input type="checkbox" name="vehicle3" value="Trolley"> I have a trolley
-<input type="submit" value="Submit">
-</form> -->
+<br>
 
-<p>{{ moment(current_time).format('LLL') }}</p>
-<p>{{ moment(current_time).fromNow(refresh=True) }}</p>
+<form method='post' action={{ url_for('home') }}>
+  <p>Enter the characters with names that begin with: <p>
+  <p>
+    <input type='text' name='name' />
+    <button type='submit'>Submit</button>
+  </p>
+</form>
 
 {% endblock %}
