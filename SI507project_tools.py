@@ -4,7 +4,6 @@ import json
 import requests
 
 # Create a cache file to store json file
-CACHE_FNAME = 'marvel_cache.json'
 
 class MarvelHero(object):
     # Constructor
@@ -21,13 +20,6 @@ class MarvelHero(object):
         else:
             return "ID: {} - Find more about {} in {}.".format(self.id, self.name, self.wiki)
 
-try:
-    cache_file = open(CACHE_FNAME, 'r')
-    CACHE_DICTION = json.loads(cache_file.read())
-    cache_file.close()
-except:
-    CACHE_DICTION = {}
-
 
 PUBLIC_KEY = "3117fd27b59beda1728b443a29c47958"
 PRIVATE_KEY = "e9c5465e209f52e14295a581cd2be315c655073b"
@@ -39,6 +31,14 @@ character = m.characters
 instance_list = []
 
 def get_hero_data_with_caching(name):
+    CACHE_FNAME = 'marvel_cache.json'
+    try:
+        cache_file = open(CACHE_FNAME, 'r')
+        CACHE_DICTION = json.loads(cache_file.read())
+        cache_file.close()
+    except:
+        CACHE_DICTION = {}
+
     if name in CACHE_DICTION:
         return CACHE_DICTION[name]
     else:

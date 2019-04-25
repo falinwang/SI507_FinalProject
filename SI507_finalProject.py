@@ -3,7 +3,8 @@ from flask_bootstrap import Bootstrap
 from datetime import datetime
 import pandas as pd
 import csv
-# from SI507project_tools import *
+from SI507project_tools import MarvelHero
+
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
@@ -16,26 +17,6 @@ def home():
     if request.method == 'POST':
         return redirect(url_for('superhero', name=request.form.get('name')))
     return render_template('index.html')
-
-###### Example
-@app.route('/loginurl', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        if login_check(request.form['username'], request.form['password']):
-            flash('Login Success!')
-            return redirect(url_for('hello', username=request.form.get('username')))
-    return render_template('login.html')
-
-def login_check(username, password):
-    if username == 'admin' and password == 'hello':
-        return True
-    else:
-        return False
-
-@app.route('/hello/<username>')
-def hello(username):
-    return render_template('hello.html', username=username)
-###### End of example
 
 @app.route('/all_superhero')
 def all_superhero():
@@ -65,6 +46,26 @@ def b():
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'),404
+
+###### Example
+@app.route('/loginurl', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        if login_check(request.form['username'], request.form['password']):
+            flash('Login Success!')
+            return redirect(url_for('hello', username=request.form.get('username')))
+    return render_template('login.html')
+
+def login_check(username, password):
+    if username == 'admin' and password == 'hello':
+        return True
+    else:
+        return False
+
+@app.route('/hello/<username>')
+def hello(username):
+    return render_template('hello.html', username=username)
+###### End of example
 
 if __name__ == '__main__':
     app.debug = True
