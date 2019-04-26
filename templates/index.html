@@ -1,17 +1,21 @@
 {% extends "base.html" %}
-
+{% import "bootstrap/wtf.html" as wtf %}
 {% block title %}Home{% endblock %}
 
 {% block page_content %}
-<h1>Welcome to the homepage!</h1>
-<br>
 
-<form method='post' action={{ url_for('home') }}>
+<!-- <form method='post' action={{ url_for('home') }}>
   <p>Enter the characters with names that begin with: <p>
   <p>
     <input type='text' name='name' />
     <button type='submit'>Submit</button>
   </p>
-</form>
+</form> -->
+<div class="container">
+  <h1>Welcome to the homepage!</h1>
+  <p>Enter the characters with names that begin with: <p>
+    {{ wtf.quick_form(form) }}
+</div>
+
 
 {% endblock %}

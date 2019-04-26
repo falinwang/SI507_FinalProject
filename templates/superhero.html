@@ -1,11 +1,22 @@
 {% extends "base.html" %}
-
+{% import "bootstrap/wtf.html" as wtf %}
 {% block title %}{{ name }}{% endblock %}
 
 {% block page_content %}
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="flash">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+{% for i in instance_list %}
 <h1>{{ name }}</h1>
 <p>{{ description }}</p>
-<img src="{% thumbnail %}" alt="Thumbnail of the superhero">
-<p>Read more here: <a href="{% wiki %}">wiki</a></p>
-
+<img src="{{ thumbnail }}" alt="Thumbnail of the superhero">
+<p>Read more here: <a href="{{ wiki }}">wiki</a></p>
+{% endfor %}
 {% endblock %}
