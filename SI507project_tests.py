@@ -22,6 +22,32 @@ class Testcase1(unittest.TestCase):
 
         self.superhero_file.close()
 
+# class Testcase2(unittest.TestCase):
+#     def website(self):
+#
+
+class PartThree(unittest.TestCase):
+    def setUp(self):
+        self.movie_instance = Movie()
+        self.distributor_instance = Distributor()
+        self.character_instance = Character()
+
+    def test_instances(self):
+        self.assertIsInstance(self.movie_instance, Movie, "testing if instance is of class Movie")
+        self.assertIsInstance(self.distributor_instance, Distributor, "testing if instance is of class Distributor")
+        self.assertIsInstance(self.character_instance, Character, "testing if instance is of class Character")
+
+class PartTwo(unittest.TestCase):
+    def setUp(self):
+        self.movie_instance = Movie(title = "Iron Man 2")
+        self.distributor_instance = Distributor(name = "distributor")
+        self.character_instance = Character(name = "Iron Man")
+
+
+    def test_instances(self):
+        self.assertEqual(self.movie_instance.title, "Iron Man 2")
+        self.assertEqual(self.distributor_instance.name, "distributor")
+        self.assertEqual(self.character_instance.name, "Iron Man")
 
 
 if __name__ == "__main__":
