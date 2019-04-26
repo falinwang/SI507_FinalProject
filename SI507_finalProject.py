@@ -23,36 +23,75 @@ session = db.session # to make queries easy
 
 
 # Model
-class Superhero(db.Model):
+association = db.Table('movie',db.Column('distributor_id',db.Integer, db.ForeignKey('distributor.id')),db.Column('character_id',db.Integer, db.ForeignKey('character.id')))
+
+class Character(db.Model):
     __tablename__ = "character"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
     description = db.Column(db.String(80))
     thumbnail = db.Column(db.String(80))
     wiki = db.Column(db.String(80))
+    movie = db.relationship('Movie',backref='Character')
+
+    def __repr__(self):
+        return "{} (ID: {})".format(self.name,self.id)
+
+class Distributor(db.Model):
+    __tablename__ = "distributor"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(256))
+    movies = db.relationship('Movie',backref='Distributor')
+
+    def __repr__(self):
+        return "{} (ID: {})".format(self.name,self.id)
 
 class Movie(db.Model):
+    __table_args__ = {'extend_existing': True}
     __tablename__ = "movie"
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(64), nullable=False)
     distributor_id = db.Column(db.Integer, db.ForeignKey("distributor.id"))
-    director_id = db.Column(db.Integer, db.ForeignKey("director.id"))
-    IMDB_rating = db.Column(db.Float)
     creative_type = db.Column(db.String(64))
     worldwide_gross = db.Column(db.Integer)
+    # character = db.Column(db.String(64), db.ForeignKey("character.id"))
 
+    def __repr__(self):
+        return "{} by {}, {}| {}".format(self.title,self.director_id, self.distributor_id, self.genre)
+
+def get_or_create_distributor(distributor_name):
+    distributor = Distributor.query.filter_by(name=distributor_name).first()
+    if distributor:
+        return distributor
+    else:
+        distributor = Distributor(name=distributor_name)
+        session.add(distributor)
+        session.commit()
+        return distributor
+
+def get_or_create_character(character_name):
+    character = Character.query.filter_by(name=character_name).first()
+    if character:
+        return character
+    else:
+        character = Character(name=character_name)
+        session.add(character)
+        session.commit()
+        return character
 
 # Form
 class FormSearch(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     submit = SubmitField('Search')
 
+class FormAddMovie(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    distributor = StringField('Distributor', validators=[DataRequired()])
+    character = StringField('Character', validators=[DataRequired()])
+    submit = SubmitField('Submit')
 
 
-clean_movies = pd.read_csv('movies_clean.csv', encoding='utf8')
-
-
-
+# clean_movies = pd.read_csv('movies_clean.csv', encoding='utf8')
 
 
 
@@ -66,70 +105,60 @@ def home():
     if form.validate_on_submit():
         name = form.name.data
         flash('Searched for: %s' % form.name.data)
-        instance_list = []
-        hero_list = get_hero_data_with_caching(name)
-        try:
-            for superhero in hero_list['data']['results']:
-                instance = MarvelHero(superhero)
-                instance_list.append(instance)
-            flash('Searching for keyword \"{}\" in Marvel database ...' % name)
-        except:
-            flash("\nSorry, no result matches the keyword. Please try again.")
-        else:
-            if instance_list != []:
-                print("Yay! Here is what I found:")
-                print("==================================================================================")
-                for i in instance_list:
-                    print("\n")
-                    print(i)
-                    break
-            else:
-                flash("\nSorry, no result matches the keyword. Please try again.")
+        searching_hero(name)
         return redirect(url_for('superhero', name=name))
     return render_template('index.html', form=form)
 
 @app.route('/all_superhero')
 def all_superhero():
-    return render_template('all_superhero.html')
+    superheroes = Character.query.all()
+    num_superheroes = len(superheroes)
+    return render_template('all_superhero.html', num_superheroes=num_superheroes)
 
-@app.route('/superhero/<name>')
+@app.route('/superhero/<name>', methods=['GET'])
 def superhero(name):
-
-    return render_template('superhero.html', name=name)
+    if request.method == "GET":
+        name = request.args.get('name','') # string
+    if Character.query.filter_by(name=name).first():
+        return "{}".format(get_or_create_character(name).name)
+    else:
+        return render_template('superhero.html', name=name)
 
 @app.route('/all_movie')
 def all_movie():
-    return render_template('all_movie.html')
+    movies = Movie.query.all()
+    num_movies = len(movies)
+    return render_template('all_movie.html', num_movies=num_movies)
 
-@app.route('/movie/<title>')
-def movie(title):
-    return render_template('movie.html', user_template=title)
+@app.route('/add_movie')
+def movie():
+    form = FormAddMovie()
+    return render_template('add_movie.html', form=form)
+
+@app.route('/newmovie_result',methods=["GET"])
+def addmovies_result():
+    if request.method == "GET":
+        title = request.args.get('title','') # string
+        director_name = request.args.get('director','') # string
+        rate = request.args.get('rating','') # integer
+        if Movie.query.filter_by(title = title).first(): # if there is a movie by that title
+            return "That movie already exists, return to home page!"
+        else: # Add movie, director and rating to database
+            director = get_or_create_director(director_name)
+            rating = create_rating(rate)
+            movie = Movie(title = title, director_id = director.id, ratings_id = rating.id)
+            session.add(movie)
+            session.commit()
+            return "New movie: <b>{}</b> by <b>{}</b>, rating: <b>{}</b>.".format(movie.title, director.name, rating.imdb_rating)
+
+    return "Nothing was submitted yet... <a href='http://localhost:5000/form2'>Go submit something</a>"
 
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'),404
 
-###### Example
-@app.route('/loginurl', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        if login_check(request.form['username'], request.form['password']):
-            flash('Login Success!')
-            return redirect(url_for('hello', username=request.form.get('username')))
-    return render_template('login.html')
-
-def login_check(username, password):
-    if username == 'admin' and password == 'hello':
-        return True
-    else:
-        return False
-
-@app.route('/hello/<username>')
-def hello(username):
-    return render_template('hello.html', username=username)
-###### End of example
 
 if __name__ == '__main__':
+    db.create_all()
     app.debug = True
-    app.secret_key = "Your Key"
     app.run()

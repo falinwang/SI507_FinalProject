@@ -45,78 +45,29 @@ def get_hero_data_with_caching(name):
         cache_file_object.close()
         return CACHE_DICTION[name]
 
-# Part 1: search superhero with keyword
-#
-superhero_list = []
-another_lst=[]
-name = input("Enter the characters with names that begin with: ")
-hero_list = get_hero_data_with_caching(name)
+# Search superhero with keyword and then output into a csv file
 
-try:
-    for superhero in hero_list['data']['results']:
-        instance = MarvelHero(superhero)
-        superhero_list.append(instance)
-    print("Searching for keyword \"{}\" in Marvel database.".format(name))
-except:
-    print("\nSorry, no result matches the keyword. Please try again.")
-# else:
-#     if superhero_list != []:
-#         print(superhero_list)
-#         print("Yay! Here is what I found:")
-#         print("==================================================================================")
-#         for i in superhero_list:
-#             print("\n")
-#             print(i)
-#     else:
-#         print("\nSorry, no result matches the keyword. Please try again.")
-#
-#
-# print("==================================================================================")
+def searching_hero(name):
+    superhero_list = []
+    another_lst=[]
+    hero_list = get_hero_data_with_caching(name)
+
+    try:
+        for superhero in hero_list['data']['results']:
+            instance = MarvelHero(superhero)
+            superhero_list.append(instance)
+        print("Searching for keyword \"{}\" in Marvel database.".format(name))
+    except:
+        print("\nSorry, no result matches the keyword. Please try again.")
+    # Part 2: dump all the superhero into one database
+    # Make a CSV file called "all_superhero.csv"
+    with open('all_superhero.csv', mode='w') as csv_file:
+        writer = csv.writer(csv_file, delimiter=',')
+        writer.writerow(['ID', 'Name', 'Description', 'Photo', 'Link'])
+        for hero in superhero_list:
+        # writer.writerow(superhero_list)
+            csv_file.write("{},{},{},{},{}\n".format(hero.id,hero.name,hero.description.strip().replace(',', '').replace('\n','').replace('\r', ' '),hero.thumbnail,hero.detail.replace(',', '')))
+        csv_file.write("\n")
 
 
-# Part 2: dump all the superhero into one database
-
-# print("\n=============== CSV =================\n")
-# Make a CSV file called "all_superhero.csv"
-
-with open('all_superhero.csv', mode='w') as csv_file:
-    writer = csv.writer(csv_file, delimiter=',')
-    writer.writerow(['ID', 'Name', 'Description', 'Photo', 'Link'])
-    for hero in superhero_list:
-    # writer.writerow(superhero_list)
-        csv_file.write("{},{},{},{},{}\n".format(hero.id,hero.name,hero.description.strip().replace(',', '').replace('\n','').replace('\r', ' '),hero.thumbnail,hero.detail.replace(',', '')))
-    csv_file.write("\n")
-
-# # ================ MOVIE =====================
-# #
-# import pandas as pd
-#
-# class Movie:
-#     def __init__(self, data):
-#         self.title = data['Title']
-#         self.us_gross = data['US Gross']
-#         self.worldwide_gross = data['Worldwide Gross']
-#         self.us_dvd_sales = data['US DVD Sales']
-#         self.production_budget = data['Production Budget']
-#         self.release_date = data['Release Date']
-#         self.mpaa_rating = data['MPAA Rating']
-#         self.time = data['Running Time (min)']
-#         self.distributor = data['Distributor']
-#         self.source = data['Source']
-#         self.genre = data['Major Genre']
-#         self.creative_type = data['Creative Type']
-#         self.director = data['Director']
-#         self.tomatoes_rating = data['Rotten Tomatoes Rating']
-#         self.imdb_rating = data['IMDB Rating']
-#         self.imdb_votes = data['IMDB Votes']
-#
-#     def __str__(self):
-#         return "{} | {}".format(self.title, self.imdb_rating)
-#
-# Marvel_moive = ['Iron Man', 'The Incredible Hulk', ]
-#
-# if __name__ == "__main__":
-#     clean_movies = pd.read_csv('movies_clean.csv')
-#     test = Movie(clean_movies.iloc[0])
-#     print(test)
-#     print(len(clean_movies.index))
+# put the data in csv into db
