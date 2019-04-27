@@ -19,7 +19,7 @@ This project is about using movie database and Marvel superheroes API to introdu
 ## How to use
 
 1. Enter some keywords about the name of the character in the searching box to search the superheroes.
-![Search Hero](image/Search_hero.png)
+![Search Hero](image/Search_Hero.png)
 2. The result will show you related hero's name, description and wiki link and the picture of the hero.
 3. Add a new movie by entering title, distributor and character.
 ![Add new movie](image/Add_movie.png)
