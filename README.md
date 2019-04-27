@@ -24,32 +24,36 @@ This project is about using movie database and Marvel superheroes API to introdu
 
 ## Routes in this application
 - `/` -> This is the home page. This page will show the upcoming Marvel movies and have a search tool for superheroes.
-- `/superhero` -> This page will show the total numbers of superheroes.
+- `/all_superhero` -> This page will show the total numbers of superheroes.
 - `/superhero/<hero_name>` -> This page will show the introduction of superheroes.
-- /movie -> This page will show the total numbers of movies.
-- /movie/<movie_name> -> This page will show the introduction of movies.
+- `/all_movie` -> This page will show the total numbers of movies.
+- `add_movie` -> This page will allow user to add a new movie.
+- `/movie/<movie_name>` -> This page will show the introduction of movies.
 
 
 ## How to run tests
-1. First... (e.g. access a certain directory if necessary)
-2. Second (e.g. any other setup necessary)
-3. etc (e.g. run the specific test file)
-NOTE: Need not have 3 steps, but should have as many as are appropriate!
+1. First you should run `python SI507project_tests.py runserver`
+2. Check terminal to see if the test is working.
 
 ## In this repository:
 - SI507project_tools.py
 - SI507project_tests.py
 - SI507_finalProject.py
-- marvel_api.py
 - requirements.txt
+- Database_Diagram.png
 - templates
   - base.html
   - index.html
   - 404.html
+  - add_movie.html
+  - all_movie.html
+  - all_superhero.html
+  - superhero.html
 - static
   - favicon.ico
-  - favicon.notes
 - marvel_cache.json (Example)
+- all_superhero.csv (Example)
+- superhero.db (Example)
 
 ---
 ## Code Requirements for Grading
@@ -62,30 +66,30 @@ Below is a list of the requirements listed in the rubric for you to copy and pas
 ### General
 - [x] Project is submitted as a Github repository
 - [x] Project includes a working Flask application that runs locally on a computer
-- [ ] Project includes at least 1 test suite file with reasonable tests in it.
+- [x] Project includes at least 1 test suite file with reasonable tests in it.
 - [x] Includes a `requirements.txt` file containing all required modules to run program
 - [x] Includes a clear and readable README.md that follows this template
-- [ ] Includes a sample .sqlite/.db file
-- [ ] Includes a diagram of your database schema
-- [ ] Includes EVERY file needed in order to run the project
+- [x] Includes a sample .sqlite/.db file
+- [x] Includes a diagram of your database schema
+- [x] Includes EVERY file needed in order to run the project
 - [ ] Includes screenshots and/or clear descriptions of what your project should look like when it is working
 
 ### Flask Application
-- [ ] Includes at least 3 different routes
-- [ ] View/s a user can see when the application runs that are understandable/legible for someone who has NOT taken this course
-- [ ] Interactions with a database that has at least 2 tables
-- [ ] At least 1 relationship between 2 tables in database
-- [ ] Information stored in the database is viewed or interacted with in some way
+- [x] Includes at least 3 different routes
+- [x] View/s a user can see when the application runs that are understandable/legible for someone who has NOT taken this course
+- [x] Interactions with a database that has at least 2 tables
+- [x] At least 1 relationship between 2 tables in database
+- [x] Information stored in the database is viewed or interacted with in some way
 
 ### Additional Components (at least 6 required)
 - [x] Use of a new module
-- [ ] Use of a second new module
+- [x] Use of a second new module
 - [ ] Object definitions using inheritance (indicate if this counts for 2 or 3 of the six requirements in a parenthetical)
-- [x] A many-to-many relationship in your database structure
+- [ ] A many-to-many relationship in your database structure
 - [x] At least one form in your Flask application
 - [x] Templating in your Flask application
 - [x] Inclusion of JavaScript files in the application
-- [ ] Links in the views of Flask application page/s
+- [x] Links in the views of Flask application page/s
 - [ ] Relevant use of `itertools` and/or `collections`
 - [ ] Sourcing of data using web scraping
 - [x] Sourcing of data using web REST API requests
@@ -94,4 +98,4 @@ Below is a list of the requirements listed in the rubric for you to copy and pas
 
 ### Submission
 - [x] I included a link to my GitHub repository with the correct permissions on Canvas! (Did you though? Did you actually? Are you sure you didn't forget?)
-- [ ] I included a summary of my project and how I thought it went **in my Canvas submission**!
+- [x] I included a summary of my project and how I thought it went **in my Canvas submission**!
